@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تهنئة بصيام رمضان</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        body {
+            background-color: #f5e6ca;
+            background-image: url('6565.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #2c3e50;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+            border: 2px solid #8e44ad;
+        }
+        
+        h1 {
+            color: #8e44ad;
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .input-section {
+            margin: 25px 0;
+        }
+        
+        input {
+            width: 70%;
+            padding: 12px 15px;
+            border: 2px solid #8e44ad;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            text-align: center;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        input:focus {
+            border-color: #9b59b6;
+            box-shadow: 0 0 10px rgba(155, 89, 182, 0.5);
+        }
+        
+        button {
+            background-color: #8e44ad;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin: 15px 5px 0;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        button:hover {
+            background-color: #9b59b6;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .certificate {
+            display: none;
+            margin: 30px auto;
+            background-color: #fff;
+            border: 5px double #8e44ad;
+            padding: 30px;
+            position: relative;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .certificate h2 {
+            color: #8e44ad;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .certificate p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin: 10px 0;
+        }
+        
+        .child-name {
+            font-size: 2rem;
+            color: #e74c3c;
+            font-weight: bold;
+            margin: 15px 0;
+            text-decoration: underline;
+        }
+        
+        .decoration {
+            position: absolute;
+            font-size: 2rem;
+            color: #8e44ad;
+            opacity: 0.3;
+        }
+        
+        .top-left {
+            top: 10px;
+            left: 10px;
+        }
+        
+        .top-right {
+            top: 10px;
+            right: 10px;
+        }
+        
+        .bottom-left {
+            bottom: 10px;
+            left: 10px;
+        }
+        
+        .bottom-right {
+            bottom: 10px;
+            right: 10px;
+        }
+        
+        .signature {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 30px;
+        }
+        
+        .signature-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .signature-line {
+            border-top: 1px solid #8e44ad;
+            width: 150px;
+            margin-top: 10px;
+            text-align: center;
+            padding-top: 5px;
+        }
+        
+        .signature-name {
+            font-size: 1.2rem;
+            color: #8e44ad;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stamp {
+            width: 100px;
+            height: 100px;
+            border: 2px solid #e74c3c;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            background-color: rgba(231, 76, 60, 0.1);
+        }
+        
+        .stamp-text {
+            font-size: 1.1rem;
+            color: #e74c3c;
+            font-weight: bold;
+            transform: rotate(-15deg);
+        }
+        
+        .stamp::before {
+            content: "";
+            position: absolute;
+            width: 90%;
+            height: 90%;
+            border: 2px dashed #e74c3c;
+            border-radius: 50%;
+        }
+        
+        .date {
+            margin-top: 20px;
+            font-style: italic;
+            color: #7f8c8d;
+        }
+        
+        .lantern {
+            font-size: 2rem;
+            margin: 0 5px;
+            color: #e67e22;
+        }
+        
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            input {
+                width: 90%;
+            }
+            
+            .certificate {
+                padding: 20px;
+            }
+            
+            .certificate h2 {
+                font-size: 1.5rem;
+            }
+            
+            .child-name {
+                font-size: 1.5rem;
+            }
+            
+            .signature {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .buttons-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            button {
+                width: 100%;
+                margin: 10px 0;
+            }
+            
+            .stamp {
+                width: 80px;
+                height: 80px;
+            }
+        }
+    </style>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>
+            <span class="lantern">🪔</span> 
+            شهادة تهنئة بصيام رمضان 
+            <span class="lantern">🪔</span>
+        </h1>
+        
+        <div class="input-section">
+            <p>أدخل اسم الطفل لإنشاء شهادة التهنئة:</p>
+            <input type="text" id="childName" placeholder="اسم الطفل هنا">
+            <div class="buttons-container">
+                <button onclick="generateCertificate()">عرض الشهادة</button>
+                <button id="downloadBtn" onclick="downloadCertificate()" style="display:none;">تحميل الشهادة</button>
+            </div>
+        </div>
+        
+        <div id="certificate" class="certificate">
+            <div class="decoration top-left">🌙</div>
+            <div class="decoration top-right">🌙</div>
+            
+            <h2>شهادة تقدير وتكريم</h2>
+            <p>بمناسبة شهر رمضان المبارك</p>
+            
+            <div class="child-name" id="displayName"></div>
+            
+            <p>نقدّر جهودك العظيمة في صيام هذا الشهر الفضيل</p>
+            <p>ونسأل الله أن يتقبل منا ومنك صالح الأعمال</p>
+            <p>وأن يجعلك من عتقائه من النار</p>
+            
+            <div class="signature">
+                <div class="signature-box">
+                    <div class="signature-name">بابا</div>
+                    <div class="signature-line"></div>
+                </div>
+                
+                <div class="signature-box">
+                    <div class="stamp">
+                        <div class="stamp-text">ختم<br>العائلة</div>
+                    </div>
+                </div>
+                
+                <div class="signature-box">
+                    <div class="signature-name">ماما</div>
+                    <div class="signature-line"></div>
+                </div>
+            </div>
+            
+            <div class="date" id="currentDate"></div>
+            
+            <div class="decoration bottom-left">🕌</div>
+            <div class="decoration bottom-right">🕌</div>
+        </div>
+    </div>
+    
+    <script>
+        function generateCertificate() {
+            const childName = document.getElementById('childName').value.trim();
+            
+            if (childName === '') {
+                alert('الرجاء إدخال اسم الطفل');
+                return;
+            }
+            
+            document.getElementById('displayName').textContent = childName;
+            
+            // Set current date
+            const now = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('currentDate').textContent = `تاريخ: ${now.toLocaleDateString('ar-EG', options)}`;
+            
+            // Show certificate and download button
+            document.getElementById('certificate').style.display = 'block';
+            document.getElementById('downloadBtn').style.display = 'inline-block';
+            
+            // Scroll to certificate
+            document.getElementById('certificate').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function downloadCertificate() {
+            const certificate = document.getElementById('certificate');
+            
+            // إعدادات html2canvas لضمان جودة الصورة
+            const options = {
+                scale: 2, // زيادة الدقة
+                logging: false,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: null,
+                scrollX: 0,
+                scrollY: 0,
+                windowWidth: certificate.scrollWidth,
+                windowHeight: certificate.scrollHeight
+            };
+            
+            // إخفاء الأزرار مؤقتًا أثناء التقاط الصورة
+            const downloadBtn = document.getElementById('downloadBtn');
+            downloadBtn.style.display = 'none';
+            
+            html2canvas(certificate, options).then(canvas => {
+                // استعادة زر التحميل
+                downloadBtn.style.display = 'inline-block';
+                
+                // إنشاء رابط التحميل
+                const link = document.createElement('a');
+                link.download = 'شهادة_صيام_رمضان_' + document.getElementById('childName').value.trim() + '.png';
+                link.href = canvas.toDataURL('image/png', 1.0); // جودة عالية
+                link.click();
+            });
+        }
+    </script>
+</body>
+</html>
