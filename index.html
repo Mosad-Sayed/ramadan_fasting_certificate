@@ -223,6 +223,37 @@
             flex-wrap: wrap;
         }
         
+        .loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #8e44ad;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
         @media (max-width: 600px) {
             .container {
                 padding: 20px;
@@ -268,11 +299,20 @@
                 width: 80px;
                 height: 80px;
             }
+            
+            .signature-line {
+                width: 120px;
+            }
         }
     </style>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </head>
 <body>
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>جاري تحضير الشهادة للتحميل...</p>
+    </div>
+    
     <div class="container">
         <h1>
             <span class="lantern">🪔</span> 
@@ -353,34 +393,62 @@
         
         function downloadCertificate() {
             const certificate = document.getElementById('certificate');
+            const loading = document.getElementById('loading');
             
-            // إعدادات html2canvas لضمان جودة الصورة
-            const options = {
-                scale: 2, // زيادة الدقة
-                logging: false,
-                useCORS: true,
-                allowTaint: true,
-                backgroundColor: null,
-                scrollX: 0,
-                scrollY: 0,
-                windowWidth: certificate.scrollWidth,
-                windowHeight: certificate.scrollHeight
-            };
+            // إظهار رسالة التحميل
+            loading.style.display = 'flex';
             
             // إخفاء الأزرار مؤقتًا أثناء التقاط الصورة
             const downloadBtn = document.getElementById('downloadBtn');
             downloadBtn.style.display = 'none';
             
-            html2canvas(certificate, options).then(canvas => {
-                // استعادة زر التحميل
-                downloadBtn.style.display = 'inline-block';
+            // تأخير التنفيذ لضمان عرض رسالة التحميل
+            setTimeout(() => {
+                // إعدادات html2canvas لضمان جودة الصورة
+                const options = {
+                    scale: 3, // زيادة الدقة للجوال
+                    logging: false,
+                    useCORS: true,
+                    allowTaint: true,
+                    backgroundColor: null,
+                    scrollX: 0,
+                    scrollY: -window.scrollY, // تصحيح للجوال
+                    windowWidth: document.documentElement.scrollWidth,
+                    windowHeight: document.documentElement.scrollHeight
+                };
                 
-                // إنشاء رابط التحميل
-                const link = document.createElement('a');
-                link.download = 'شهادة_صيام_رمضان_' + document.getElementById('childName').value.trim() + '.png';
-                link.href = canvas.toDataURL('image/png', 1.0); // جودة عالية
-                link.click();
-            });
+                html2canvas(certificate, options).then(canvas => {
+                    // إخفاء رسالة التحميل
+                    loading.style.display = 'none';
+                    
+                    // استعادة زر التحميل
+                    downloadBtn.style.display = 'inline-block';
+                    
+                    // إنشاء رابط التحميل
+                    const link = document.createElement('a');
+                    link.download = 'شهادة_صيام_رمضان_' + document.getElementById('childName').value.trim() + '.png';
+                    link.href = canvas.toDataURL('image/png', 1.0);
+                    
+                    // طريقة بديلة للجوال لضمان عمل التحميل
+                    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                        // للجوال، نفتح الصورة في نافذة جديدة ونسمح للمستخدم بحفظها يدوياً
+                        const newWindow = window.open();
+                        newWindow.document.write('<img src="' + link.href + '" alt="شهادة الصيام" style="max-width:100%;"/>');
+                        newWindow.document.title = link.download;
+                        setTimeout(() => {
+                            alert('الرجاء الضغط مطولاً على الصورة وحفظها إلى معرض الصور');
+                        }, 500);
+                    } else {
+                        // للويب، التحميل العادي
+                        link.click();
+                    }
+                }).catch(err => {
+                    console.error('Error generating certificate:', err);
+                    loading.style.display = 'none';
+                    downloadBtn.style.display = 'inline-block';
+                    alert('حدث خطأ أثناء إنشاء الشهادة. الرجاء المحاولة مرة أخرى.');
+                });
+            }, 100);
         }
     </script>
 </body>
